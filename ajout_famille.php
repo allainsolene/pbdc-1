@@ -10,7 +10,7 @@ $site->js='jquery.tooltipster.min';
 $site->style='tooltipster';
 $site->style='perso';
 
-
+//dfkljgklmdfjgdfklj
 $controleur=new controleur();
 
 $site-> right_sidebar=$site-> rempli_right_sidebar();
