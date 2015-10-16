@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Ven 25 Septembre 2015 à 16:21
+-- Généré le :  Ven 16 Octobre 2015 à 15:38
 -- Version du serveur :  5.6.17
 -- Version de PHP :  5.5.12
 
@@ -31,16 +31,14 @@ CREATE TABLE IF NOT EXISTS `administrateur` (
   `identifiant` varchar(30) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `mp` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Contenu de la table `administrateur`
 --
 
 INSERT INTO `administrateur` (`id`, `identifiant`, `mp`) VALUES
-(1, 'florian', '0147896325'),
-(2, 'mathieu', '5236987410'),
-(3, 'solene', '9874102365');
+(1, 'pierre', '84675f2baf7140037b8f5afe54eef841');
 
 -- --------------------------------------------------------
 
@@ -61,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `commentaireenfant` (
 --
 
 INSERT INTO `commentaireenfant` (`id_enfant`, `id_personnel`, `commentaire_enfant`) VALUES
-(1, 3, 'encastre legos'),
+(1, 1, 'encastre lego'),
 (2, 1, 'marche tout seul');
 
 -- --------------------------------------------------------
@@ -122,15 +120,14 @@ CREATE TABLE IF NOT EXISTS `famille` (
   `date_envoi_mail_demande_inscription` date DEFAULT NULL,
   PRIMARY KEY (`id_famille`),
   UNIQUE KEY `identifiant` (`identifiant`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Contenu de la table `famille`
 --
 
 INSERT INTO `famille` (`id_famille`, `identifiant`, `mp`, `nom1`, `prenom1`, `adresse11`, `adresse12`, `cp1`, `ville1`, `mail1`, `tel11`, `tel12`, `tel13`, `fonction1`, `nom2`, `prenom2`, `adresse21`, `adresse22`, `cp2`, `ville2`, `mail2`, `tel21`, `tel22`, `tel23`, `fonction2`, `date_envoi_mail_demande_inscription`) VALUES
-(1, 'Chopin', '0123456789', 'Chopin', 'Christine', '113 avenue fontevraud', NULL, 49400, 'saumur', 'chopiC@gmail.com', '0660216979', NULL, NULL, 'directeur d''agence', 'Chopin', 'Didier', '113 avenue fontevraud', NULL, '49400', 'saumur', 'chopiD@gmail.com', '0658729407', NULL, NULL, 'boulanger', '2015-09-17'),
-(9, '', '', '', '', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(1, 'chopin', '781e5e245d69b566979b86e28d23f2c7', 'Chopin', 'Christine', '113 avenue fontevraud', NULL, 49400, 'saumur', 'chopiC@gmail.com', '0660216979', NULL, NULL, 'directeur d''agence', 'Chopin', 'Didier', '113 avenue fontevraud', NULL, '49400', 'saumur', 'chopiD@gmail.com', '0658729407', NULL, NULL, 'boulanger', '2015-09-17');
 
 -- --------------------------------------------------------
 
@@ -183,16 +180,14 @@ CREATE TABLE IF NOT EXISTS `personnel` (
   `login` varchar(30) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `mdp_personnel` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT 'pbcd49',
   PRIMARY KEY (`id_personnel`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Contenu de la table `personnel`
 --
 
 INSERT INTO `personnel` (`id_personnel`, `login`, `mdp_personnel`) VALUES
-(1, 'Damien', 'pbcd49'),
-(2, 'Mickael', 'pbcd49'),
-(3, 'Thomas', 'pbcd49');
+(1, 'personnel', 'pbdc49');
 
 --
 -- Contraintes pour les tables exportées
@@ -209,15 +204,15 @@ ALTER TABLE `commentaireenfant`
 -- Contraintes pour la table `inscriptionenfant`
 --
 ALTER TABLE `inscriptionenfant`
-  ADD CONSTRAINT `inscriptionenfant_ibfk_2` FOREIGN KEY (`id_enfant`) REFERENCES `enfant` (`id_enfant`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `inscriptionenfant_ibfk_1` FOREIGN KEY (`id_famille`) REFERENCES `famille` (`id_famille`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `inscriptionenfant_ibfk_1` FOREIGN KEY (`id_famille`) REFERENCES `famille` (`id_famille`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `inscriptionenfant_ibfk_2` FOREIGN KEY (`id_enfant`) REFERENCES `enfant` (`id_enfant`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `inscriptionfamille`
 --
 ALTER TABLE `inscriptionfamille`
-  ADD CONSTRAINT `inscriptionfamille_ibfk_2` FOREIGN KEY (`id_famille`) REFERENCES `famille` (`id_famille`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `inscriptionfamille_ibfk_1` FOREIGN KEY (`id`) REFERENCES `administrateur` (`id`);
+  ADD CONSTRAINT `inscriptionfamille_ibfk_1` FOREIGN KEY (`id`) REFERENCES `administrateur` (`id`),
+  ADD CONSTRAINT `inscriptionfamille_ibfk_2` FOREIGN KEY (`id_famille`) REFERENCES `famille` (`id_famille`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
